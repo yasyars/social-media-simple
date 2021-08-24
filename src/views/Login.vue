@@ -40,7 +40,7 @@ export default {
   methods: {
     onClick() {
       if (this.username!=''){
-        const url = `http://localhost:4567/user/${this.username}`
+        const url = `http://34.97.129.31:4567/user/${this.username}`
         axios.get(url)
         .then(res => {
           let result = res.data
