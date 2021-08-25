@@ -27,6 +27,7 @@
         </tr>
       </tbody>
     </table>
+
       <div class="d-flex flex-column ml-2" >
         <a class="ml-2" href = "/items/new">
         <div class="btn btn-primary ">
@@ -36,8 +37,12 @@
         </a>
         <br>
         <div >
-          <div class=" d-flex justify-content-center"></div>
-          <div>Trending Hashtags</div>
+          <div><h3>Trending Hashtags</h3></div>
+          <ul id="trending">
+            <li v-for="hashtag in hashtags" :key="hashtag.id">
+              {{ hashtag.word }}
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -48,10 +53,27 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
+import axios from "axios";
 
 export default {
   name: 'Home',
   components: {
+  },
+  data(){
+    return{
+      hashtags: []
+    }
+  },
+  created(){
+    const url = `http://34.97.129.31:4567/hashtag/trending`
+    axios.get(url)
+    .then(res => {
+
+      let result = res.data
+
+      this.hashtags = result.data
+
+    })
   }
 }
 </script>
