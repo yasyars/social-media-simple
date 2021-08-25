@@ -13,14 +13,14 @@
         <th>User</th>
         <th>Post</th>
         <th>Time</th>
-        <th>Action</th>
+        <!-- <th>Action</th> -->
       </thead>
       <tbody>
         <tr v-for= "post in posts" :key="post.id">
           <td>{{post.user.username}}</td>
           <td>{{post.content}}</td>
           <td>{{post.timestamp}}</td>
-          <td><a href=#>see comments</a>&nbsp;&nbsp;&nbsp; <a href=#>add comments</a></td>
+          <!-- <td><a href=#>see comments</a>&nbsp;&nbsp;&nbsp; <a href=#>add comments</a></td> -->
         </tr>
       </tbody>
     </table>

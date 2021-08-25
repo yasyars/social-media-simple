@@ -4,12 +4,12 @@
     <div class="d-flex justify-content-center">
       <Post></Post>
       <div class="d-flex flex-column ml-2" >
-        <a class="ml-2" href = "/items/new">
-        <div class="btn btn-primary ">
+        <!-- <a class="ml-2" href = "/items/new"> -->
+        <!-- <div class="btn btn-primary ">
           <div class="fa fa-plus d-flex justify-content-center"></div>
           <div>Add Post</div>
-        </div>
-        </a>
+        </div> -->
+        <!-- </a> -->
         <br>
         <div >
           <div><h3>Trending Hashtags</h3></div>

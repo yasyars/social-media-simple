@@ -1,6 +1,6 @@
 <template>
 
-<h2 class="d-flex justify-content-center" >Login</h2>
+<h2 class="d-flex justify-content-center" >Register</h2>
 <!-- <form  > -->
   <div class="d-flex justify-content-center">
   <table class="table w-50" >
@@ -11,17 +11,24 @@
           <input v-model="username" class="form-text mr-2" name="username" type="text" >
         </td>
       </tr>
+      <tr>
+        <td>Email</td>
+        <td>
+          <input v-model="email" class="form-text mr-2" name="username" type="text" >
+        </td>
+      </tr>
+      <tr>
+        <td>Bio</td>
+        <td>
+          <input v-model="bio" class="form-text mr-2" name="username" type="text" >
+        </td>
+      </tr>
     </tbody>
   </table>
   </div>
   <div class="d-flex justify-content-center ">
-    <!-- <button @click= toRegister() class="mr-2 btn btn-primary" > Register</button> -->
-   
-    <button @click= onClick() class="btn btn-primary"> Login</button>
-
+    <button @click= onClick() class="mr-2 btn btn-primary" > Register</button>
   </div>
-<!-- </form> -->
-
 </template>
 
 <script>
@@ -34,31 +41,37 @@ export default {
   },
   data() {
     return{
-      username: ''
+      username: '',
+      email: '',
+      bio:''
     }
   },
   methods: {
     onClick() {
-      if (this.username!=''){
-        const url = `http://34.97.129.31:4567/user/${this.username}`
-        axios.get(url)
+      if (this.username!='' && this.email!=''){
+        const url = `http://34.97.129.31:4567/user`
+        axios.post(url,{
+          params : {   
+            username: this.username,
+            email: this.email,
+            bio: this.bio
+          }
+          
+        })
         .then(res => {
           let result = res.data
-          console.log(result.status)
+          console.log(result.message)
 
-          if (result.data!=null){
+          if (result.status=='success'){
             alert("Welcome "+this.username)
             this.$router.push('/home')
 
           }else{
-            alert(`${this.username} not found`)
+            alert(result.error.message)
           }
         })
       }
 
-    },
-    toRegister(){
-      this.$router.push('/register')
     }
   }
 }
