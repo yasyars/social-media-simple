@@ -15,8 +15,8 @@
   </table>
   </div>
   <div class="d-flex justify-content-center ">
-    <!-- <button @click= toRegister() class="mr-2 btn btn-primary" > Register</button> -->
-   
+    <button @click= toRegister() class="mr-2 btn btn-primary" > Register</button>
+ 
     <button @click= onClick() class="btn btn-primary"> Login</button>
 
   </div>
