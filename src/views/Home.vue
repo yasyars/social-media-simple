@@ -4,6 +4,9 @@
     <div class="d-flex justify-content-center">
       <Post :user_id=this.user_id></Post>
       <div class="d-flex flex-column ml-2" >
+        <a class="ml-2" href='/' >Logout</a>
+        <br>
+        <br>
         <a class="ml-2" href=# @click="addPost()">
         <div class="btn btn-primary ">
           <div class="fa fa-plus d-flex justify-content-center"></div>
@@ -68,5 +71,10 @@ export default {
 ul{
   list-style-type: none;
   padding:0;
+}
+
+
+a{
+  text-decoration: underline;
 }
 </style>

@@ -100,6 +100,9 @@ li {
   margin: 0 10px;
 }
 
+a{
+  text-decoration: underline;
+}
 .form-text{
   height: 100px;
 }
