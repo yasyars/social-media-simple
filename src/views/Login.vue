@@ -44,12 +44,10 @@ export default {
         axios.get(url)
         .then(res => {
           let result = res.data
-          console.log(result.status)
 
           if (result.data!=null){
             alert("Welcome "+this.username)
-            this.$router.push('/home')
-
+            this.$router.push({ name: 'Home', params: {user_id: result.data.id }})
           }else{
             alert(`${this.username} not found`)
           }

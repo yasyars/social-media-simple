@@ -36,7 +36,7 @@ import axios from "axios";
 import qs from "qs";
 
 export default {
-  name: 'HelloWorld',
+  name: 'Register',
   props: {
     msg: String
   },
@@ -64,13 +64,10 @@ export default {
           }
         )
         .then( res =>{
-          console.log(res.data)
+          res.data
           this.getUsername()
-          alert("Welcome "+this.username)
-          this.$router.push('/home')
         })
         .catch(function (error) {
-          // handle error
             alert(error.response.data.error.message);
         })
       }
@@ -80,9 +77,13 @@ export default {
       axios.get(get_url)
       .then(res_get => {
         var result_get = res_get.data
-
         this.user_id = result_get.data.id
-        console.log(this.user_id)
+        // console.log(2)
+        alert("Welcome "+this.username)
+        // console.log(this.user_id)
+        this.$router.push({ name: 'Home', params: {user_id: this.user_id }})
+        // console.log(1)
+
       })
     }
   }

@@ -1,19 +1,21 @@
 <template>
 <div class="w-100 ml-5 d-flex flex-column justify-content-center">
   <div class="d-flex justify-content-center mb-3 ">
+    Post:
+    user : post attachment
+  </div>
+  <div class="d-flex justify-content-center mb-3 ">
     <p class="pt-2">
     Enter hashtags: &nbsp;&nbsp;# 
     </p>
     <input v-model="filter_hashtag" class=" ml-2 form-text mr-2">
     <button @click = filterHashtag() class="btn btn-primary" > Filter</button>
-
   </div>
    <table class="table" >
       <thead class="thead-dark sm">
         <th>User</th>
-        <th>Post</th>
+        <th>Comment</th>
         <th>Time</th>
-        <th>Action</th>
       </thead>
       <tbody>
         <tr v-for= "post in posts" :key="post.id">
@@ -24,7 +26,6 @@
             <a target="_blank" v-bind:href="post.attachment">{{post.attachment}}</a>
           </td>
           <td>{{post.timestamp}}</td>
-          <td><a href=#>see comments</a>&nbsp;&nbsp;|&nbsp;&nbsp; <a href=#>add comments</a></td>
         </tr>
       </tbody>
     </table>
@@ -35,7 +36,7 @@
 import axios from "axios";
 
 export default {
-  name: 'HelloWorld',
+  name: 'Comment',
   data(){
     return{
       posts: [],
