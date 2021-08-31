@@ -44,7 +44,8 @@ export default {
   ,
   data(){
     return{
-      hashtags: []
+      hashtags: [],
+      userId: this.user_id
     }
   },
   created(){
@@ -58,7 +59,7 @@ export default {
   },
   methods: {
     addPost(){
-      this.$router.push({ name: 'Post', params: {user_id: this.$props.user_id }})
+      this.$router.push({ name: 'Post', params: {user_id: this.userId}})
     }
   }
 }

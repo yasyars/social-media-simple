@@ -37,9 +37,6 @@ import qs from "qs";
 
 export default {
   name: 'Register',
-  props: {
-    msg: String
-  },
   data() {
     return{
       username: '',

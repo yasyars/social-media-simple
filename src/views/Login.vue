@@ -28,10 +28,7 @@
 import axios from "axios";
 
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
+  name: 'Login',
   data() {
     return{
       username: ''
