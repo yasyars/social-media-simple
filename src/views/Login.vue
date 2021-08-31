@@ -15,8 +15,8 @@
   </table>
   </div>
   <div class="d-flex justify-content-center ">
-    <!-- <button @click= toRegister() class="mr-2 btn btn-primary" > Register</button> -->
-   
+    <button @click= toRegister() class="mr-2 btn btn-primary" > Register</button>
+ 
     <button @click= onClick() class="btn btn-primary"> Login</button>
 
   </div>
@@ -28,10 +28,7 @@
 import axios from "axios";
 
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
+  name: 'Login',
   data() {
     return{
       username: ''
@@ -44,12 +41,10 @@ export default {
         axios.get(url)
         .then(res => {
           let result = res.data
-          console.log(result.status)
 
           if (result.data!=null){
             alert("Welcome "+this.username)
-            this.$router.push('/home')
-
+            this.$router.push({ name: 'Home', params: {user_id: result.data.id }})
           }else{
             alert(`${this.username} not found`)
           }

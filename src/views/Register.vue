@@ -33,45 +33,55 @@
 
 <script>
 import axios from "axios";
+import qs from "qs";
 
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
+  name: 'Register',
   data() {
     return{
       username: '',
       email: '',
-      bio:''
+      bio:'',
+      user_id:0
     }
   },
   methods: {
     onClick() {
       if (this.username!='' && this.email!=''){
         const url = `http://34.97.129.31:4567/user`
-        axios.post(url,{
-          params : {   
+        axios.post(url,qs.stringify({   
             username: this.username,
             email: this.email,
             bio: this.bio
+          }),
+          {
+            headers: {
+              'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
           }
-          
+        )
+        .then( res =>{
+          res.data
+          this.getUsername()
         })
-        .then(res => {
-          let result = res.data
-          console.log(result.message)
-
-          if (result.status=='success'){
-            alert("Welcome "+this.username)
-            this.$router.push('/home')
-
-          }else{
-            alert(result.error.message)
-          }
+        .catch(function (error) {
+            alert(error.response.data.error.message);
         })
       }
+    },
+    getUsername(){
+      const get_url = `http://34.97.129.31:4567/user/${this.username}`
+      axios.get(get_url)
+      .then(res_get => {
+        var result_get = res_get.data
+        this.user_id = result_get.data.id
+        // console.log(2)
+        alert("Welcome "+this.username)
+        // console.log(this.user_id)
+        this.$router.push({ name: 'Home', params: {user_id: this.user_id }})
+        // console.log(1)
 
+      })
     }
   }
 }

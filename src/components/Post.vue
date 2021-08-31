@@ -13,14 +13,18 @@
         <th>User</th>
         <th>Post</th>
         <th>Time</th>
-        <!-- <th>Action</th> -->
+        <th>Action</th>
       </thead>
       <tbody>
         <tr v-for= "post in posts" :key="post.id">
-          <td>{{post.user.username}}</td>
-          <td>{{post.content}}</td>
+          <td>@{{post.user.username}}</td>
+          <td>{{post.content}}
+            <br>
+            <br>
+            <a target="_blank" v-bind:href="post.attachment">{{post.attachment}}</a>
+          </td>
           <td>{{post.timestamp}}</td>
-          <!-- <td><a href=#>see comments</a>&nbsp;&nbsp;&nbsp; <a href=#>add comments</a></td> -->
+          <td><a href=# @click=seeComment(post) >see comments</a>&nbsp;&nbsp;|&nbsp;&nbsp; <a href=# @click=addComment(post)>add comments</a></td>
         </tr>
       </tbody>
     </table>
@@ -31,14 +35,19 @@
 import axios from "axios";
 
 export default {
-  name: 'HelloWorld',
+  name: 'Post',
   data(){
     return{
       posts: [],
-      filter_hashtag: ""
+      filter_hashtag: "",
+      userId: this.user_id
     }
   },
+  props:
+    ['user_id']
+  ,
   mounted(){
+    console.log("user_id post table: " + this.user_id)
     this.getAll()
   },
   methods:{
@@ -54,7 +63,6 @@ export default {
       if (this.filter_hashtag!=""){
 
         const url = `http://34.97.129.31:4567/post?hashtag=%23${this.filter_hashtag}`
-        console.log(this.filter_hashtag)
 
         axios.get(url)
         .then(res => {
@@ -64,6 +72,12 @@ export default {
       }else{
         this.getAll()
       }
+    },
+    seeComment(post){
+      this.$router.push({ name: 'Comment', params: {user_id: this.userId, post_id:post.id, post_username: post.user.username, post_content: post.content, post_attachment: post.attachment, post_timestamp: post.timestamp }})
+    },
+    addComment(post){
+      this.$router.push({ name: 'CommentForm', params: {user_id: this.userId, post_id:post.id, post_username: post.user.username, post_content: post.content, post_attachment: post.attachment, post_timestamp: post.timestamp }})
     }
   }
 }
@@ -82,8 +96,10 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-a {
-  color: #42b983;
+
+
+a{
+  text-decoration: underline;
 }
 
 .table{
